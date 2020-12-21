@@ -1,15 +1,22 @@
 package com.woniu.util;
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
+import java.util.ArrayList;
+
+/**
+ * @author Alex
+ */
 public class MybatisPlusAutoCode {
     public static void main(String[] args) {
         //构建代码自动生成器对象
@@ -26,7 +33,7 @@ public class MybatisPlusAutoCode {
         gc.setOpen(false);                                     //代码生成后是否打开文件夹
         gc.setFileOverride(false);                             //是否覆盖
         gc.setServiceName("%sService");                        //去Service的I前缀
-        gc.setIdType(IdType.ID_WORKER);                        //自定义主键生成策略
+//        gc.setIdType(IdType.ID_WORKER);                        //自定义主键生成策略
         gc.setDateType(DateType.ONLY_DATE);                    //自定义日期类型
         gc.setSwagger2(true);                                  //实体使用swagger2注解
 
@@ -34,10 +41,10 @@ public class MybatisPlusAutoCode {
         //2、设置数据源:
         // https://baomidou.com/config/generator-config.html#%E6%95%B0%E6%8D%AE%E6%BA%90-datasourceconfig-%E9%85%8D%E7%BD%AE
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/taotao?characterEncoding=utf-8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/db_pawn?characterEncoding=utf8&serverTimezone=UTC");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("");
+        dsc.setPassword("alex");
         dsc.setDbType(DbType.MYSQL);                          //指定数据库类型
 
         autoGenerator.setDataSource(dsc);                     //添加数据源配置
@@ -64,13 +71,13 @@ public class MybatisPlusAutoCode {
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setEntityLombokModel(true);                 //自动lombok；
 //        strategy.setLogicDeleteFieldName("deleted");         //设置使用逻辑删除策略的属性名
-//        // 自动填充配置 TableFill
-//        TableFill gmtCreate = new TableFill("gmt_create", FieldFill.INSERT);
-//        TableFill gmtModified = new TableFill("gmt_modified", FieldFill.INSERT_UPDATE);
-//        ArrayList<TableFill> tableFills = new ArrayList<>();
-//        tableFills.add(gmtCreate);
-//        tableFills.add(gmtModified);
-//        strategy.setTableFillList(tableFills);tableFills
+        // 自动填充配置 TableFill
+        TableFill gmtCreate = new TableFill("gmt_create", FieldFill.INSERT);
+        TableFill gmtModified = new TableFill("gmt_modified", FieldFill.INSERT_UPDATE);
+        ArrayList<TableFill> tableFills = new ArrayList<>();
+        tableFills.add(gmtCreate);
+        tableFills.add(gmtModified);
+        strategy.setTableFillList(tableFills);
 
         // strategy.setVersionFieldName("version");             // 乐观锁
         strategy.setRestControllerStyle(true);               //生成 @RestController 控制器

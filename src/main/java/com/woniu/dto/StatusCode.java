@@ -5,4 +5,5 @@ public class StatusCode {
     public static final int ERROR = 20001;//失败
     public static final int LOGINERROR = 20002;//用户名或密码错误
     public static final int ACCESSERROR = 20003;//权限不足
+    public static final int USEREXIST = 20004;//用户不存在
 }
