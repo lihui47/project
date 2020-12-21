@@ -1,0 +1,9 @@
+server:
+  port: 9090
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_pawn?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password:
