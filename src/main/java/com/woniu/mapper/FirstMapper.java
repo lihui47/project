@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  * @since 2020-12-22
  */
 @Repository
-public abstract class FirstMapper implements BaseMapper<First> {
+public  interface FirstMapper extends BaseMapper<First> {
 
 }
