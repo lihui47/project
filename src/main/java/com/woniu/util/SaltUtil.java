@@ -2,6 +2,9 @@ package com.woniu.util;
 
 import java.util.Random;
 
+/**
+ * @author Alex
+ */
 public class SaltUtil {
     public static String getSalt(int count) {//使用参数决定生成的随机盐长度
         char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()".toCharArray();

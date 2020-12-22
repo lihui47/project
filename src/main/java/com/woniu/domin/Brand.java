@@ -18,25 +18,25 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author team
- * @since 2020-12-21
+ * @since 2020-12-22
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
-    @TableName("t_user")
-@ApiModel(value="User对象", description="")
-public class User implements Serializable {
+    @TableName("t_brand")
+@ApiModel(value="Brand对象", description="")
+public class Brand implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-      @ApiModelProperty(value = "用户id")
+      @ApiModelProperty(value = "品牌id")
         @TableId(value = "id", type = IdType.AUTO)
       private Integer id;
 
-      @ApiModelProperty(value = "用户名")
-      private String username;
+      @ApiModelProperty(value = "品牌缩写")
+      private String abbr;
 
-      @ApiModelProperty(value = "用户密码")
-      private String password;
+      @ApiModelProperty(value = "品牌名称")
+      private String name;
 
       @ApiModelProperty(value = "创建时间")
         @TableField(fill = FieldFill.INSERT)
@@ -44,10 +44,6 @@ public class User implements Serializable {
 
       @ApiModelProperty(value = "更新时间")
       private Date gmtModifified;
-
-    private String salt;
-
-    private String status;
 
 
 }

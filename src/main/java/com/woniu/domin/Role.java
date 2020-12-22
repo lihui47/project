@@ -22,32 +22,25 @@ import lombok.EqualsAndHashCode;
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
-    @TableName("t_user")
-@ApiModel(value="User对象", description="")
-public class User implements Serializable {
+    @TableName("t_role")
+@ApiModel(value="Role对象", description="")
+public class Role implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-      @ApiModelProperty(value = "用户id")
+      @ApiModelProperty(value = "角色id")
         @TableId(value = "id", type = IdType.AUTO)
       private Integer id;
 
-      @ApiModelProperty(value = "用户名")
-      private String username;
-
-      @ApiModelProperty(value = "用户密码")
-      private String password;
+      @ApiModelProperty(value = "角色名称")
+      private String name;
 
       @ApiModelProperty(value = "创建时间")
         @TableField(fill = FieldFill.INSERT)
       private Date gmtCreate;
 
-      @ApiModelProperty(value = "更新时间")
+      @ApiModelProperty(value = "修改时间")
       private Date gmtModifified;
-
-    private String salt;
-
-    private String status;
 
 
 }
