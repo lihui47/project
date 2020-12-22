@@ -10,7 +10,7 @@ import com.woniu.vo.PageVO;
 
 /**
  * <p>
- *  服务类
+ *  业务层服务类
  * </p>
  *
  * @author sun
