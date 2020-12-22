@@ -43,7 +43,7 @@ public class CustomerRealm extends AuthorizingRealm {
         String principal = (String) token.getPrincipal();
         //整合mybatis后再查询数据库获取
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name",principal);
+        queryWrapper.eq("username",principal);
         User user = userService.getOne(queryWrapper);
         //根据用户名查询得到的用户不为空
         if (!ObjectUtils.isEmpty(user)) {

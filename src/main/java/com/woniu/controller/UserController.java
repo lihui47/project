@@ -22,12 +22,12 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public Result<Object> register(@RequestBody User user){
         return userService.register(user);
     }
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public  Result<Object> login(User user) {
         return userService.login(user);
     }
