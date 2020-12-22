@@ -24,6 +24,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/first")
+@CrossOrigin
 public class FirstController {
     @Resource
     private FirstService firstService;
