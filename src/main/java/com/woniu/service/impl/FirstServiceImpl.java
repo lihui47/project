@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ *  业务层服务实现类
  * </p>
  *
  * @author sun

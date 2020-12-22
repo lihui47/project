@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ *  商品大类前端控制器
  * </p>
  *
  * @author sun
