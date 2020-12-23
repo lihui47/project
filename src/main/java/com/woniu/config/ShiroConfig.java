@@ -19,19 +19,6 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-
-        //过滤器的规则配置
-//        LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-//        filterChainDefinitionMap.put("/js/**","anon");
-//        filterChainDefinitionMap.put("/**","user");
-//        filterChainDefinitionMap.put("/login.html","anon");
-//        filterChainDefinitionMap.put("/register.html","anon");
-//        filterChainDefinitionMap.put("/user","anon");
-
-
-//        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-//        shiroFilterFactoryBean.setLoginUrl("/login.html");
-
         return shiroFilterFactoryBean;
     }
 

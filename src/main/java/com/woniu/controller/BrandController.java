@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * @author team
  * @since 2020-12-22
  */
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/brand")
 public class BrandController {
@@ -31,6 +31,7 @@ public class BrandController {
 
     @GetMapping("/queryLikely")
     public Result<Object> queryLikely(CheckVO checkVO){
+        System.out.println(checkVO);
         Page<Brand> page = brandService.queryBrandLikely(checkVO);
         return new Result<>(true, StatusCode.OK,"模糊查询成功",page);
     }

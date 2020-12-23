@@ -1,14 +1,13 @@
 package com.woniu.controller;
 
-import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.woniu.domin.User;
 import com.woniu.dto.Result;
 import com.woniu.dto.StatusCode;
+import com.woniu.service.UserRolerService;
 import com.woniu.service.UserService;
 import com.woniu.vo.UserBlurVo;
 import com.woniu.vo.UserPageVo;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,11 +20,13 @@ import java.util.List;
  */
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/check")
 public class CheckUserController {
     @Resource
     private UserService userService;
+    @Resource
+    private UserRolerService userRolerService;
     /*
     查询所有需要审核的用户
      */
@@ -41,6 +42,8 @@ public class CheckUserController {
     public Result checkUser(User user){
         System.out.println(user);
         int row=userService.updateUserById(user);
+        //授予用户角色
+        userRolerService.InsertUserRole(user);
         return new Result(true,StatusCode.OK,"审核通过");
     }
     /*

@@ -37,9 +37,11 @@ public interface UserService extends IService<User> {
     List<User> findAllCheckUser();
     //审核通过用户
     int updateUserById(User user);
+//    //审核通过之后，赋予用户角色
+//    int insertUserRole(User user);
     //驳回用户
     int updateRejectUserById(User user);
-    //分页查询所以用户
+    //分页查询所有用户
     Page findAllUser(UserPageVo userPageVo);
     //删除用户
     int deleteUserById(Integer id);

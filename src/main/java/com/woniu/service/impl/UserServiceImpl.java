@@ -48,7 +48,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public Result<Object> register(User user) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name",user.getUsername());
+        queryWrapper.eq("username",user.getUsername());
         User user1 = userMapper.selectOne(queryWrapper);
         if(ObjectUtils.isEmpty(user1)){
             String salt = SaltUtil.getSalt(8);
@@ -113,6 +113,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         return 0;
     }
+    /*
+    审核通过后赋予用户角色
+     */
+//    @Override
+//    public int insertUserRole(User user) {
+//        int insert = userMapper.insert(user);
+//        return 0;
+//    }
+
     /*
     驳回方法
      */
