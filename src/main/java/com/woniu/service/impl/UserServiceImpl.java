@@ -48,7 +48,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public Result<Object> register(User user) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name",user.getUsername());
+        queryWrapper.eq("username",user.getUsername());
         User user1 = userMapper.selectOne(queryWrapper);
         if(ObjectUtils.isEmpty(user1)){
             String salt = SaltUtil.getSalt(8);

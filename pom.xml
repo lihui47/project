@@ -43,9 +43,9 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.38</version>
+            <version>8.0.22</version>
         </dependency>
-<!--        lomok-->
+<!--        lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -53,9 +53,9 @@
         </dependency>
 <!--        导入shiro依赖-->
                 <dependency>
-                            <groupId>org.apache.shiro</groupId>
-                            <artifactId>shiro-spring-boot-starter</artifactId>
-                            <version>1.5.3</version>
+                    <groupId>org.apache.shiro</groupId>
+                    <artifactId>shiro-spring-boot-starter</artifactId>
+                    <version>1.5.3</version>
                 </dependency>
 <!--        swagger2 自动生成文档工具-->
         <dependency>
@@ -91,6 +91,12 @@
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.3.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -101,7 +107,7 @@
                 <configuration>
                     <excludes>
                         <exclude>
-                            <groupId>org.projectlombok</groupId>
+                            <groupId>org.projectors</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
