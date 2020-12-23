@@ -38,7 +38,7 @@ public class MybatisPlusAutoCode {
         //2、设置数据源:
         // https://baomidou.com/config/generator-config.html#%E6%95%B0%E6%8D%AE%E6%BA%90-datasourceconfig-%E9%85%8D%E7%BD%AE
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/taotao?characterEncoding=utf-8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/db_pawn?characterEncoding=utf-8");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("");
@@ -60,7 +60,7 @@ public class MybatisPlusAutoCode {
         // https://baomidou.com/config/generator-config.html#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E9%85%8D%E7%BD%AE
         StrategyConfig strategy = new StrategyConfig();
         // 设置要生成的实体类对应映射的表名
-        strategy.setInclude("t_user");
+        strategy.setInclude("t_identifity");
         strategy.setTablePrefix("t_");                       //去除表名前缀
         //设置表名生成策略，下划线转驼峰
         strategy.setNaming(NamingStrategy.underline_to_camel);
