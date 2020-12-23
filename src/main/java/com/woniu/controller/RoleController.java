@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/role")
-@CrossOrigin
+//@CrossOrigin
 public class RoleController {
 
 }

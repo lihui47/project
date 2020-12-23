@@ -114,6 +114,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return 0;
     }
     /*
+    审核通过后赋予用户角色
+     */
+//    @Override
+//    public int insertUserRole(User user) {
+//        int insert = userMapper.insert(user);
+//        return 0;
+//    }
+
+    /*
     驳回方法
      */
     @Override

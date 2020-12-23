@@ -27,8 +27,6 @@ public class ShiroConfig {
 //        filterChainDefinitionMap.put("/login.html","anon");
 //        filterChainDefinitionMap.put("/register.html","anon");
 //        filterChainDefinitionMap.put("/user","anon");
-
-
 //        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 //        shiroFilterFactoryBean.setLoginUrl("/login.html");
 
