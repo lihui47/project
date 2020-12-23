@@ -18,7 +18,6 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/user")
-@CrossOrigin
 public class UserController {
     @Resource
     private UserService userService;

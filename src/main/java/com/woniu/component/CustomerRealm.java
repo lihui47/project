@@ -47,9 +47,10 @@ public class CustomerRealm extends AuthorizingRealm {
         User user = userService.getOne(queryWrapper);
         //根据用户名查询得到的用户不为空
         if (!ObjectUtils.isEmpty(user)) {
-            return new SimpleAuthenticationInfo(user,user.getPassword(),
-                ByteSource.Util.bytes(user.getSalt()),
-                this.getName());
+            return new SimpleAuthenticationInfo(user,
+                    user.getPassword(),
+                    ByteSource.Util.bytes(user.getSalt()),
+                    this.getName());
         }
         return null;
     }
