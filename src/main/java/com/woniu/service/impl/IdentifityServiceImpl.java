@@ -108,7 +108,7 @@ public class IdentifityServiceImpl extends ServiceImpl<IdentifityMapper, Identif
         System.out.println(identifity+"查到的数据");
         return identifity;
     }
-
+    //修改鉴定信息
     @Override
     public int updateIdentifity(Identifity identifity) {
         System.out.println(identifity+"业务层"+identifity.getId());

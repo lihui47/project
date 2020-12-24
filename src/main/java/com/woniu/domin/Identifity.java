@@ -58,7 +58,9 @@ public class Identifity implements Serializable {
       //鉴定结果
       private String indentifyresult;
 
-    private BigDecimal identify_price;
+    private Double identify_price;
+
+    //BigDecimal
 
 
 }
