@@ -31,8 +31,9 @@ public class CheckUserController {
     查询所有需要审核的用户
      */
     @GetMapping("showCheck")
-    public Result ShowCheckUser(){
-       List<User> list= userService.findAllCheckUser();
+    public Result ShowCheckUser(UserPageVo userPageVo){
+        System.out.println(userPageVo);
+       Page list= userService.findAllCheckUser(userPageVo);
         return new Result(true, StatusCode.OK,"查询成功" ,list);
     }
     /*
