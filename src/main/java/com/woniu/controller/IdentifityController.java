@@ -35,6 +35,7 @@ public class IdentifityController {
     //分页查询全部
     @GetMapping("/test")
     public Result querypro(PageVO pageVO){
+        System.out.println(pageVO);
         Page<IdentifityVo> page1 = new Page<>(pageVO.getCurrent(),pageVO.getSizePage());
         IPage<IdentifityVo> pageAll = identifityService.getPageAll(page1);
         //List<IdentifityVo> records = page.getRecords();
@@ -44,12 +45,11 @@ public class IdentifityController {
     //分页条件查询
     @GetMapping("/pro")
     public Result queryProduct(IdentifityVo identifityVo){
-        System.out.println(identifityVo+"前端的值"+identifityVo.getCurrent());
+        System.out.println(identifityVo+"前端的值"+identifityVo.getCurrent()+identifityVo.getSizePage());
 
         IPage<IdentifityVo> voPage = identifityService.queryConditional(identifityVo);
 
-
-        return new Result(true, StatusCode.OK,"查询成功",voPage);
+        return new Result(true, StatusCode.OK,"查询cg",voPage);
     }
 
 
@@ -63,6 +63,12 @@ public class IdentifityController {
             return  new Result(true,StatusCode.OK,"删除成功");
         }
         return  new Result(false,StatusCode.ERROR,"删除失败");
+    }
+
+    //修改鉴定
+    @PutMapping("/updateIden")
+    public Result updateIden(){
+        return new Result();
     }
 
 }
