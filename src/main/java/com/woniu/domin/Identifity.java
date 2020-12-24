@@ -52,8 +52,7 @@ public class Identifity implements Serializable {
 
       @ApiModelProperty(value = "更新时间")
       private Date gmtModifified;
-
-    private BigDecimal identifyPrice;
-
-
+      private BigDecimal identifyPrice;
+      private String oldnew;
+      private String indentifyresult;
 }
