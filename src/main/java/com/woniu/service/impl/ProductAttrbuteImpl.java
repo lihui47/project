@@ -149,6 +149,10 @@ public class ProductAttrbuteImpl extends ServiceImpl<ProductAttributeMapper, Pro
 
     @Override
     public int updateProductStatus(ProductAttribute productAttribute) {
+        int update = productAttributeMapper.updateById(productAttribute);
+        if(update>0){
+            return 1;
+        }
         return 0;
     }
 
