@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2020-12-22
  */
 public interface IdentifityMapper extends BaseMapper<IdentifityVo> {
-    @Select("SELECT i.id,p.`name`,s.sname,i.writer,i.identitier,i.`status`,i.gmt_create  " +
+    @Select("SELECT i.id,p.`name`,s.sname,i.writer,i.identitier,i.`status`,i.gmt_create,p.price " +
             "FROM t_identifity i  " +
             "JOIN t_product p  " +
             "ON i.pid=p.id  " +
