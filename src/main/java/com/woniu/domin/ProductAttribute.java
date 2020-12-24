@@ -40,7 +40,7 @@ public class ProductAttribute implements Serializable {
 
     private double price;
 
-    private Integer status;
+    private String status;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
@@ -55,4 +55,7 @@ public class ProductAttribute implements Serializable {
 
     @TableField(exist = false)
     private String secondName;
+
+    @TableField(exist = false)
+    private String userName;
 }
