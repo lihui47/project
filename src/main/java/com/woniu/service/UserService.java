@@ -34,7 +34,7 @@ public interface UserService extends IService<User> {
      */
     Result<Object> login(User user);
     //查询所以需要审核的用户
-    List<User> findAllCheckUser();
+   Page findAllCheckUser(UserPageVo userPageVo);
     //审核通过用户
     int updateUserById(User user);
 //    //审核通过之后，赋予用户角色

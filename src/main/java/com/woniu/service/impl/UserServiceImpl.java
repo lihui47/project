@@ -94,11 +94,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 查询所以需要审核的员工
  */
     @Override
-    public List<User> findAllCheckUser() {
+    public Page findAllCheckUser(UserPageVo userPageVo) {
+        Page<User> userPage = new Page<>(userPageVo.getCurrent(),userPageVo.getSize());
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("status","已申请");
-        List<User> users = userMapper.selectList(queryWrapper);
-        return users;
+        //List<User> users = userMapper.selectList(queryWrapper);
+        Page<User> page = userMapper.selectPage(userPage, queryWrapper);
+        return page;
     }
     /*
     审核通过

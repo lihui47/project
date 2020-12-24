@@ -27,5 +27,6 @@ public interface IdentifityService extends IService<IdentifityVo> {
     //删除
 
     int deleteIdentifity(Identifity identifity);
-
+    //插入鉴定，去鉴定
+    int insertIdentify(IdentifityVo identifityVo);
 }
