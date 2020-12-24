@@ -15,8 +15,8 @@ public class GoIndentifyServiceImpl extends ServiceImpl<GoIndentifyMapper, Ident
     @Resource
     private GoIndentifyMapper goIndentifyMapper;
     @Override
-    public int insertIdentify(Identifity identifity) {
-        int insert = goIndentifyMapper.insert(identifity);
+    public int insertToUPdateIdentify(Identifity identifity) {
+        int insert = goIndentifyMapper.updateById(identifity);
         if(insert>0){
             return 1;
         }

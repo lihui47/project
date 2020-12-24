@@ -23,6 +23,8 @@ import java.util.List;
  * @author team
  * @since 2020-12-22
  */
+
+//查询全部
 public interface IdentifityMapper extends BaseMapper<IdentifityVo> {
     @Select("SELECT i.id,p.`name`,s.sname,i.writer,i.identitier,i.`status`,i.gmt_create,p.price  " +
             "FROM t_identifity i  " +
@@ -32,7 +34,7 @@ public interface IdentifityMapper extends BaseMapper<IdentifityVo> {
             "ON p.sid=s.id")
     Page<IdentifityVo> getPageAll(Page<IdentifityVo> identifityVoPage);
     //List<IdentifityVo> queryAll(Page page);
-
+//条件查询
     @Select("SELECT i.id,p.`name`,s.sname,i.writer,i.identitier,i.`status`,i.gmt_create\n" +
             "FROM t_identifity i\n" +
             "JOIN t_product p\n" +
@@ -43,15 +45,15 @@ public interface IdentifityMapper extends BaseMapper<IdentifityVo> {
     Page<IdentifityVo> getConditional(Page<IdentifityVo> identifityVoPage,@Param(Constants.WRAPPER) QueryWrapper<IdentifityVo> queryWrapper);
     //List<IdentifityVo> queryConditional(Page page);
 
-
-    @Select("SELECT i.id,i.identitier,s.sname,p.`name`,p.price,i.newold,i.indentifyresult,i.identify_price\n" +
+    //查询鉴定信息
+    @Select("SELECT i.id,i.status ,i.identitier,s.sname,p.`name`,p.price,i.newold,i.indentifyresult,i.identify_price\n" +
             "FROM t_identifity i\n" +
             "JOIN t_product p\n" +
             "ON i.pid=p.id\n" +
             "JOIN t_second s\n" +
             "on s.id=p.sid\n" +
             "JOIN t_brand b\n" +
-            "on p.bid=b.id"+
+            "on p.bid=b.id   " +
             "${ew.customSqlSegment}")
     List<IdentifityVo> getIdentifity(IdentifityVo identifityVo,@Param(Constants.WRAPPER) QueryWrapper<IdentifityVo> queryWrapper);
 

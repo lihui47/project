@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.woniu.domin.Identifity;
+import com.woniu.mapper.GoIndentifyMapper;
 import com.woniu.mapper.IdentifityMapper;
 import com.woniu.service.IdentifityService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -31,6 +32,8 @@ public class IdentifityServiceImpl extends ServiceImpl<IdentifityMapper, Identif
     @Resource
     private IdentifityMapper identifityMapper;
 
+    @Resource
+    private GoIndentifyMapper goIndentifyMapper;
 
 //    @Override
 //    public Page queryAll(PageVO pageVO) {
@@ -99,11 +102,21 @@ public class IdentifityServiceImpl extends ServiceImpl<IdentifityMapper, Identif
     public List<IdentifityVo> getIdentifityVo(IdentifityVo identifityVo) {
         System.out.println(identifityVo+"前端信息");
         QueryWrapper<IdentifityVo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("id",identifityVo.getId());
+        queryWrapper.eq("i.id",identifityVo.getId());
         List<IdentifityVo> identifity = identifityMapper.getIdentifity(identifityVo, queryWrapper);
 
         System.out.println(identifity+"查到的数据");
         return identifity;
+    }
+
+    @Override
+    public int updateIdentifity(Identifity identifity) {
+        System.out.println(identifity+"业务层"+identifity.getId());
+        QueryWrapper<Identifity> updateWrapper = new QueryWrapper<>();
+        updateWrapper.eq("id",identifity.getId());
+        int update = goIndentifyMapper.update(identifity, updateWrapper);
+
+        return update;
     }
 
 

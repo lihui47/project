@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 
 
 public interface GoIndentifyService extends IService<Identifity> {
-    int insertIdentify(Identifity identifity);
+    int insertToUPdateIdentify(Identifity identifity);
 }

@@ -29,7 +29,7 @@ public class IdentifityVo  {
     //当前页码条数
     private Integer sizePage;
     //鉴定价格
-    private Double identify_price;
+    private BigDecimal identify_price;
     //新旧程度
     private String newold;
     //鉴定结果

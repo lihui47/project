@@ -24,12 +24,12 @@ public class GoIndentifyController {
     @PostMapping("addIndentify")
     public Result addIndentify(@RequestBody Identifity identifity){
         System.out.println(identifity);
-        int row=goIndentifyService.insertIdentify(identifity);
+        int row=goIndentifyService.insertToUPdateIdentify(identifity);
         if(row>0){
             //鉴定成功后，修改商品表里的状态
             ProductAttribute productAttribute = new ProductAttribute();
             productAttribute.setId(identifity.getPid());
-            //productAttribute.setStatus(1);
+            //productAttribute.setStatus("");
             int result=productAttributeService.updateProductStatus(productAttribute);
             return new Result(true, StatusCode.OK,"鉴定成功");
         }

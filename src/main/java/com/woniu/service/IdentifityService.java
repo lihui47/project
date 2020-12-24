@@ -33,6 +33,8 @@ public interface IdentifityService extends IService<IdentifityVo> {
     int insertIdentify(IdentifityVo identifityVo);
 
     //根据ID查询鉴定信息
-
     List<IdentifityVo> getIdentifityVo(IdentifityVo identifityVo);
+
+    //修改鉴定信息
+    int updateIdentifity(Identifity identifity);
 }
