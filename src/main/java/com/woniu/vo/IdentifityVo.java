@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -21,8 +22,16 @@ public class IdentifityVo  {
     private String identitier;
     private String status;
     private Date gmt_create;
+    //商品价格
+    private Double price;
     //当前页码
     private Integer current;
     //当前页码条数
     private Integer sizePage;
+    //鉴定价格
+    private Double identify_price;
+    //新旧程度
+    private String newold;
+    //鉴定结果
+    private String indentifyresult;
 }
