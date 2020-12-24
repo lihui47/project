@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class IdentifityVo  {
 
-    //i.id,p.`name`,s.`name` AS sneme,i.writer,i.identitier,i.`status`,i.gmt_create
+
     private Integer id;
     private String name;
     private String sname;

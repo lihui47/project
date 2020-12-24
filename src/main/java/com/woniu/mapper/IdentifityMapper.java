@@ -2,6 +2,7 @@ package com.woniu.mapper;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.woniu.domin.Identifity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -9,6 +10,7 @@ import com.woniu.vo.IdentifityVo;
 import com.woniu.vo.ToIdentifityVo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
 
 
 import java.util.List;
@@ -38,7 +40,7 @@ public interface IdentifityMapper extends BaseMapper<IdentifityVo> {
             "JOIN t_second s\n" +
             "ON p.sid=s.id\n" +
             "${ew.customSqlSegment}")
-    Page<IdentifityVo> getConditional(Page<IdentifityVo> identifityVoPage,QueryWrapper<IdentifityVo> queryWrapper);
+    Page<IdentifityVo> getConditional(Page<IdentifityVo> identifityVoPage,@Param(Constants.WRAPPER) QueryWrapper<IdentifityVo> queryWrapper);
     //List<IdentifityVo> queryConditional(Page page);
 
 

@@ -53,24 +53,30 @@ public class IdentifityServiceImpl extends ServiceImpl<IdentifityMapper, Identif
 
     @Override
     public Page<IdentifityVo> queryConditional(IdentifityVo identifityVo) {
-
+        System.out.println(identifityVo+"业务层");
         QueryWrapper<IdentifityVo> queryWrapper = new QueryWrapper<>();
         if(!ObjectUtils.isEmpty(identifityVo.getStatus())){
+            System.out.println(identifityVo.getStatus());
             queryWrapper.eq("i.status", identifityVo.getStatus());
+            System.out.println("状态不为空");
         }
         if(!ObjectUtils.isEmpty(identifityVo.getName())){
-            queryWrapper.eq("i.status", identifityVo.getName());
+            queryWrapper.eq("p.name", identifityVo.getName());
+            System.out.println("商品名不为空");
         }
         if(!ObjectUtils.isEmpty(identifityVo.getIdentitier())){
-            queryWrapper.eq("i.status", identifityVo.getIdentitier());
+            queryWrapper.eq("i.identitier", identifityVo.getIdentitier());
+            System.out.println("操作人不为空");
         }
         if(!ObjectUtils.isEmpty(identifityVo.getGmt_create())){
-            queryWrapper.eq("i.status", identifityVo.getGmt_create());
+            queryWrapper.eq("i.gmt_create", identifityVo.getGmt_create());
+            System.out.println("时间不为空");
         }
-        Page<IdentifityVo> page = new Page<>(identifityVo.getCurrent(),identifityVo.getSizePage());
-        IPage<IdentifityVo> voPage = identifityMapper.selectPage(page, queryWrapper);
-
-        return (Page)voPage;
+        Page<IdentifityVo> page = new Page<>(identifityVo.getCurrent(),3);
+        IPage<IdentifityVo> voPage = identifityMapper.getConditional(page,queryWrapper);
+        System.out.println(page+"www");
+        System.out.println(voPage.getSize()+"ddd");
+        return (Page) voPage;
     }
 
     @Override
