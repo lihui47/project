@@ -7,6 +7,8 @@ import com.woniu.vo.IdentifityVo;
 import com.woniu.vo.PageVO;
 import com.woniu.vo.ToIdentifityVo;
 
+import java.util.List;
+
 
 /**
  * <p>
@@ -29,4 +31,8 @@ public interface IdentifityService extends IService<IdentifityVo> {
     int deleteIdentifity(Identifity identifity);
     //插入鉴定，去鉴定
     int insertIdentify(IdentifityVo identifityVo);
+
+    //根据ID查询鉴定信息
+
+    List<IdentifityVo> getIdentifityVo(IdentifityVo identifityVo);
 }

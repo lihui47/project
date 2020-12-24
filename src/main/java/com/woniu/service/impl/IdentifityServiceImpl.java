@@ -42,7 +42,7 @@ public class IdentifityServiceImpl extends ServiceImpl<IdentifityMapper, Identif
 //
 //        return voPage;
 //    }
-
+    //查询所有
     @Override
     public Page<IdentifityVo> getPageAll(Page<IdentifityVo> identifityVoPage) {
 
@@ -50,7 +50,7 @@ public class IdentifityServiceImpl extends ServiceImpl<IdentifityMapper, Identif
 
         return pageAll;
     }
-
+    //条件查询
     @Override
     public Page<IdentifityVo> queryConditional(IdentifityVo identifityVo) {
         System.out.println(identifityVo+"业务层");
@@ -78,7 +78,7 @@ public class IdentifityServiceImpl extends ServiceImpl<IdentifityMapper, Identif
         System.out.println(voPage.getSize()+"ddd");
         return (Page) voPage;
     }
-
+    //删除
     @Override
     public int deleteIdentifity(Identifity identifity) {
 
@@ -93,6 +93,17 @@ public class IdentifityServiceImpl extends ServiceImpl<IdentifityMapper, Identif
         int insert = identifityMapper.insert(identifityVo);
 
         return 0;
+    }
+    //查询鉴定信息
+    @Override
+    public List<IdentifityVo> getIdentifityVo(IdentifityVo identifityVo) {
+        System.out.println(identifityVo+"前端信息");
+        QueryWrapper<IdentifityVo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",identifityVo.getId());
+        List<IdentifityVo> identifity = identifityMapper.getIdentifity(identifityVo, queryWrapper);
+
+        System.out.println(identifity+"查到的数据");
+        return identifity;
     }
 
 

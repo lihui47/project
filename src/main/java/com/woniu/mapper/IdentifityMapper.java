@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2020-12-22
  */
 public interface IdentifityMapper extends BaseMapper<IdentifityVo> {
-    @Select("SELECT i.id,p.`name`,s.sname,i.writer,i.identitier,i.`status`,i.gmt_create  " +
+    @Select("SELECT i.id,p.`name`,s.sname,i.writer,i.identitier,i.`status`,i.gmt_create,p.price  " +
             "FROM t_identifity i  " +
             "JOIN t_product p  " +
             "ON i.pid=p.id  " +
@@ -43,6 +43,17 @@ public interface IdentifityMapper extends BaseMapper<IdentifityVo> {
     Page<IdentifityVo> getConditional(Page<IdentifityVo> identifityVoPage,@Param(Constants.WRAPPER) QueryWrapper<IdentifityVo> queryWrapper);
     //List<IdentifityVo> queryConditional(Page page);
 
+
+    @Select("SELECT i.id,i.identitier,s.sname,p.`name`,p.price,i.newold,i.indentifyresult,i.identify_price\n" +
+            "FROM t_identifity i\n" +
+            "JOIN t_product p\n" +
+            "ON i.pid=p.id\n" +
+            "JOIN t_second s\n" +
+            "on s.id=p.sid\n" +
+            "JOIN t_brand b\n" +
+            "on p.bid=b.id"+
+            "${ew.customSqlSegment}")
+    List<IdentifityVo> getIdentifity(IdentifityVo identifityVo,@Param(Constants.WRAPPER) QueryWrapper<IdentifityVo> queryWrapper);
 
 
 
