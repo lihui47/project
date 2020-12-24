@@ -24,5 +24,6 @@ public interface ProductAttributeService extends IService<ProductAttribute> {
     //删除商品信息
     Result deleteProductAttrInfo(ProductAttribute productAttribute) throws Exception;
 
-
+    //鉴定完成后，修改商品状态
+    int updateProductStatus(ProductAttribute productAttribute);
 }

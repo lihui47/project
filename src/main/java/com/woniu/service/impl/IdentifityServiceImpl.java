@@ -79,6 +79,15 @@ public class IdentifityServiceImpl extends ServiceImpl<IdentifityMapper, Identif
         int i = identifityMapper.deleteById(identifity);
         return i;
     }
+    /*
+    鉴定完成后，插入数据
+     */
+    @Override
+    public int insertIdentify(IdentifityVo identifityVo) {
+        int insert = identifityMapper.insert(identifityVo);
+
+        return 0;
+    }
 
 
 }

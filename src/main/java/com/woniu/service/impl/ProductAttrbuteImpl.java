@@ -129,4 +129,12 @@ public class ProductAttrbuteImpl extends ServiceImpl<ProductAttributeMapper, Pro
         }
         return null;
     }
+    /*
+    鉴定完成后，修改商品状态
+     */
+    @Override
+    public int updateProductStatus(ProductAttribute productAttribute) {
+        productAttributeMapper.updateById(productAttribute);
+        return 0;
+    }
 }
