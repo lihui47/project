@@ -33,7 +33,7 @@ public class IdentifityController {
     @Resource
     private IdentifityService identifityService;
     //分页查询全部
-    @GetMapping("/test")
+    @GetMapping("test")
     public Result querypro(PageVO pageVO){
         System.out.println(pageVO);
         Page<IdentifityVo> page1 = new Page<>(pageVO.getCurrent(),pageVO.getSizePage());

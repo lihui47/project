@@ -7,9 +7,10 @@ import com.woniu.mapper.IdentifityMapper;
 import com.woniu.service.GoIndentifyService;
 import com.woniu.service.IdentifityService;
 import com.woniu.vo.IdentifityVo;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-
+@Service
 public class GoIndentifyServiceImpl extends ServiceImpl<GoIndentifyMapper, Identifity> implements GoIndentifyService {
     @Resource
     private GoIndentifyMapper goIndentifyMapper;
