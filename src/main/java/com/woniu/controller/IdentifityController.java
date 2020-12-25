@@ -66,9 +66,25 @@ public class IdentifityController {
     }
 
     //修改鉴定
-    @PutMapping("/updateIden")
-    public Result updateIden(){
-        return new Result();
+    @GetMapping("/updateIden")
+    public Result updateIden(Identifity identifity){
+        System.out.println(identifity+"前端的值");
+        int i = identifityService.updateIdentifity(identifity);
+        if(i>0){
+            return new Result(true,StatusCode.OK,"修改成功");
+        }
+        return new Result(false,StatusCode.ERROR,"修改失败");
+    }
+
+
+    //查询鉴定信息
+    @GetMapping("/queryident")
+    public Result queryident(IdentifityVo identifityVo){
+        System.out.println(identifityVo.getId()+"前端的ID");
+        List<IdentifityVo> identifityVo1 = identifityService.getIdentifityVo(identifityVo);
+        System.out.println(identifityVo1+"cccc"+identifityVo.getIdentify_price());
+
+        return  new Result(true,StatusCode.OK,"查询成功",identifityVo1);
     }
 
 }

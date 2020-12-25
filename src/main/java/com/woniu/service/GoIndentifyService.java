@@ -6,6 +6,7 @@ import com.woniu.domin.ProductAttribute;
 import org.springframework.stereotype.Service;
 
 
+
 public interface GoIndentifyService extends IService<Identifity> {
     int insertToUPdateIdentify(Identifity identifity);
     //根据商品id查询商品

@@ -20,10 +20,10 @@ import java.util.Date;
  **/
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+//@Accessors(chain = true)
 @TableName("t_product")
 @ApiModel(value = "ProductAttribute对象", description = "")
-@Component
+//@Component
 public class ProductAttribute implements Serializable {
 
     private static final long serialVersionUID = 1L;
