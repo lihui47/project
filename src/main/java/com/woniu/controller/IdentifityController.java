@@ -82,7 +82,7 @@ public class IdentifityController {
     public Result queryident(IdentifityVo identifityVo){
         System.out.println(identifityVo.getId()+"前端的ID");
         List<IdentifityVo> identifityVo1 = identifityService.getIdentifityVo(identifityVo);
-        System.out.println(identifityVo1+"cccc"+identifityVo.getIdentify_price());
+        System.out.println(identifityVo1+"cccc"+identifityVo.getIprice());
 
         return  new Result(true,StatusCode.OK,"查询成功",identifityVo1);
     }

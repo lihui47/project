@@ -46,7 +46,7 @@ public interface IdentifityMapper extends BaseMapper<IdentifityVo> {
     //List<IdentifityVo> queryConditional(Page page);
 
     //查询鉴定信息
-    @Select("SELECT i.id,i.status ,i.identitier,s.`name` sanme,p.`name`,p.price,i.newold,i.indentifyresult,i.identify_price  " +
+    @Select("SELECT i.id,i.status ,i.identitier,s.`name` sname,p.`name`,p.price,i.oldnew,i.indentifyresult,i.`identify_price` iprice  " +
             "FROM t_identifity i  " +
             "JOIN t_product p  " +
             "ON i.pid=p.id  " +
