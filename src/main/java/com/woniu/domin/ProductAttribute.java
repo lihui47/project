@@ -32,14 +32,15 @@ public class ProductAttribute implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty(value = "商品名称")
     private String name;
-
+    @ApiModelProperty(value = "二级分类外键")
     private Integer sid;
-
+    @ApiModelProperty(value = "商品数量")
     private Integer number;
-
+    @ApiModelProperty(value = "商品价格")
     private double price;
-
+    @ApiModelProperty(value = "商品状态")
     private String status;
 
     @ApiModelProperty(value = "创建时间")
