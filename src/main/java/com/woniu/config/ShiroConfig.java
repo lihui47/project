@@ -1,14 +1,22 @@
 package com.woniu.config;
 import com.woniu.component.CustomerRealm;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import com.woniu.component.JwtFilter;
+import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
+import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
+/**
+ * @author Alex
+ */
 @Configuration
 public class ShiroConfig {
 
@@ -18,7 +26,19 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        // 添加自己的过滤器并且取名为jwt
+        Map<String, Filter> filterMap = new LinkedHashMap<>();
+        //设置我们自定义的JWT过滤器
+        filterMap.put("jwt", new JwtFilter());
+        shiroFilterFactoryBean.setFilters(filterMap);
         shiroFilterFactoryBean.setSecurityManager(securityManager);
+        Map<String, String> filterRuleMap = new LinkedHashMap<>(111);
+        //允许匿名访问
+        filterRuleMap.put("/user/login","anon");
+        filterRuleMap.put("/user/register","anon");
+        // 所有请求通过我们自己的JWT Filter
+        filterRuleMap.put("/**", "jwt");
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return shiroFilterFactoryBean;
     }
 
@@ -30,7 +50,24 @@ public class ShiroConfig {
     public DefaultWebSecurityManager defaultWebSecurityManager(Realm realm){
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         defaultWebSecurityManager.setRealm((realm));
+
+        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
+        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
+        subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
+        defaultWebSecurityManager.setSubjectDAO(subjectDAO);
         return defaultWebSecurityManager;
+    }
+
+    /**
+     * 添加注解支持
+     */
+    @Bean
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        // 强制使用cglib，防止重复代理和可能引起代理出错的问题
+        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
+        return defaultAdvisorAutoProxyCreator;
     }
 
     /**
@@ -38,12 +75,6 @@ public class ShiroConfig {
      */
     @Bean
     public Realm realm(){
-        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
-        CustomerRealm customerRealm = new CustomerRealm();
-        credentialsMatcher.setHashAlgorithmName("MD5");
-        //设置散列次数
-        credentialsMatcher.setHashIterations(1024);
-        customerRealm.setCredentialsMatcher(credentialsMatcher);
-        return  customerRealm;
+        return new CustomerRealm();
     }
 }

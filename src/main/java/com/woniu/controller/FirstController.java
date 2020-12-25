@@ -45,20 +45,17 @@ public class FirstController {
 
     @PostMapping("insertFirst")
     public Result insertFirstInfo(@RequestBody First first)throws Exception {
-        Result result = firstService.insertFirstInfo(first);
-        return result;
+        return firstService.insertFirstInfo(first);
     }
 
     @PostMapping("updataFirst")
     public Result updataFirstInfo(@RequestBody First first)throws Exception {
-        Result result = firstService.updataFirstInfo(first);
-        return result;
+        return firstService.updataFirstInfo(first);
     }
 
     @PostMapping("deleteFirst")
     public Result deleteFirst(@RequestBody First first)throws Exception {
-        Result result = firstService.deleteFirstInfo(first);
-        return result;
+        return firstService.deleteFirstInfo(first);
     }
 
 }

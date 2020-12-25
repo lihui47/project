@@ -4,9 +4,12 @@ package com.woniu.controller;
 import com.woniu.domin.User;
 import com.woniu.dto.Result;
 import com.woniu.service.UserService;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -27,8 +30,8 @@ public class UserController {
         return userService.register(user);
     }
 
-    @GetMapping("/login")
-    public  Result<Object> login(User user) {
+    @PostMapping("/login")
+    public  Result<Object> login(@RequestBody User user) {
         return userService.login(user);
     }
 }
