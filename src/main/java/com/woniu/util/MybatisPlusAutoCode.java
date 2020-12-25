@@ -14,9 +14,6 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.util.ArrayList;
 
-/**
- * @author Alex
- */
 public class MybatisPlusAutoCode {
     public static void main(String[] args) {
         //构建代码自动生成器对象
@@ -33,7 +30,7 @@ public class MybatisPlusAutoCode {
         gc.setOpen(false);                                     //代码生成后是否打开文件夹
         gc.setFileOverride(false);                             //是否覆盖
         gc.setServiceName("%sService");                        //去Service的I前缀
-//        gc.setIdType(IdType.ID_WORKER);                        //自定义主键生成策略
+        gc.setIdType(IdType.ID_WORKER);                        //自定义主键生成策略
         gc.setDateType(DateType.ONLY_DATE);                    //自定义日期类型
         gc.setSwagger2(true);                                  //实体使用swagger2注解
 
@@ -41,10 +38,10 @@ public class MybatisPlusAutoCode {
         //2、设置数据源:
         // https://baomidou.com/config/generator-config.html#%E6%95%B0%E6%8D%AE%E6%BA%90-datasourceconfig-%E9%85%8D%E7%BD%AE
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/db_pawn?characterEncoding=utf8&serverTimezone=UTC");
+        dsc.setUrl("jdbc:mysql://localhost:3306/db_pawn?characterEncoding=utf-8");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("alex");
+        dsc.setPassword("");
         dsc.setDbType(DbType.MYSQL);                          //指定数据库类型
 
         autoGenerator.setDataSource(dsc);                     //添加数据源配置
@@ -63,7 +60,7 @@ public class MybatisPlusAutoCode {
         // https://baomidou.com/config/generator-config.html#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E9%85%8D%E7%BD%AE
         StrategyConfig strategy = new StrategyConfig();
         // 设置要生成的实体类对应映射的表名
-        strategy.setInclude("t_brand");
+        strategy.setInclude("t_identifity");
         strategy.setTablePrefix("t_");                       //去除表名前缀
         //设置表名生成策略，下划线转驼峰
         strategy.setNaming(NamingStrategy.underline_to_camel);

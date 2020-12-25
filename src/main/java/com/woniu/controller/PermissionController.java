@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/permission")
-@CrossOrigin
+//@CrossOrigin
 public class PermissionController {
 
 }

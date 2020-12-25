@@ -1,7 +1,6 @@
 package com.woniu.controller;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -12,12 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author team
- * @since 2020-12-21
+ * @since 2020-12-22
  */
 @RestController
-@RequestMapping("/role")
-//@CrossOrigin
-public class RoleController {
+@RequestMapping("//user-role")
+public class UserRolerController {
 
 }
 

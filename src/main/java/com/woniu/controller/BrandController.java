@@ -23,7 +23,7 @@ import javax.annotation.Resource;
  * @author team
  * @since 2020-12-22
  */
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/brand")
 public class BrandController {

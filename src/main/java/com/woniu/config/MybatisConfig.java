@@ -16,6 +16,7 @@ public class MybatisConfig {
     // 分页查询组件
     @Bean
     public PaginationInterceptor paginationInterceptor(){
+
         return new PaginationInterceptor();
     }
 }
