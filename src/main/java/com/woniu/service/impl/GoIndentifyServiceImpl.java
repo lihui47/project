@@ -46,4 +46,11 @@ public class GoIndentifyServiceImpl extends ServiceImpl<GoIndentifyMapper, Ident
         System.out.println(identifity);
         return identifity;
     }
+    //删除
+    @Override
+    public int deleteIdentifity(Identifity identifity) {
+
+        int i = goIndentifyMapper.deleteById(identifity);
+        return i;
+    }
 }

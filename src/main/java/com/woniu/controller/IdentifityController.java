@@ -8,6 +8,7 @@ import com.woniu.domin.Identifity;
 import com.woniu.dto.Result;
 import com.woniu.dto.StatusCode;
 import com.woniu.mapper.IdentifityMapper;
+import com.woniu.service.GoIndentifyService;
 import com.woniu.service.IdentifityService;
 import com.woniu.vo.IdentifityVo;
 import com.woniu.vo.PageVO;
@@ -34,7 +35,8 @@ import java.util.List;
 @CrossOrigin
 @Api(tags = {"商品列表接口controller"})
 public class IdentifityController {
-
+    @Resource
+    private GoIndentifyService goIndentifyService;
     @Resource
     private IdentifityService identifityService;
     //分页查询全部
@@ -70,7 +72,7 @@ public class IdentifityController {
     @ApiImplicitParam(name = "Identifity", value = "封装的删除信息")
     public Result deleteidentifity(@RequestBody Identifity identifity ){
 
-        int i = identifityService.deleteIdentifity(identifity);
+        int i = goIndentifyService.deleteIdentifity(identifity);
         if (i>0){
             return  new Result(true,StatusCode.OK,"删除成功");
         }

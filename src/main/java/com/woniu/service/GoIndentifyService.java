@@ -13,4 +13,8 @@ public interface GoIndentifyService extends IService<Identifity> {
     ProductAttribute selectProductById(Integer pid);
     //根据鉴定id查找鉴定
     Identifity selectIdentifyById(Integer id);
+
+    //删除
+
+    int deleteIdentifity(Identifity identifity);
 }

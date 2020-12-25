@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
-    @TableName("t_user_roler")
+    @TableName("t_user_role")
 @ApiModel(value="UserRole对象", description="")
 public class UserRoler implements Serializable {
 

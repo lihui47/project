@@ -81,13 +81,7 @@ public class IdentifityServiceImpl extends ServiceImpl<IdentifityMapper, Identif
         System.out.println(voPage.getSize()+"ddd");
         return (Page) voPage;
     }
-    //删除
-    @Override
-    public int deleteIdentifity(Identifity identifity) {
 
-        int i = identifityMapper.deleteById(identifity);
-        return i;
-    }
     /*
     鉴定完成后，插入数据
      */
