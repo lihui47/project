@@ -60,6 +60,7 @@ public class CheckUserController {
      */
     @GetMapping("AllUser")
     public Result selectAllUser(UserPageVo userPageVo){
+        System.out.println("真的好烦呀");
        Page page= userService.findAllUser(userPageVo);
         return new Result(true,StatusCode.OK,"查询成功",page);
     }
