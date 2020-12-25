@@ -13,6 +13,7 @@ import com.woniu.util.RedisUtil;
 import com.woniu.util.SaltUtil;
 import com.woniu.vo.UserBlurVo;
 import com.woniu.vo.UserPageVo;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,12 +66,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param user the user
      * @return the result
      */
+
     @Override
     public Result<Object> login(User user) {
         if(!ObjectUtils.isEmpty(user)){
             User userRedis = userMapper.selectOne(new QueryWrapper<User>().eq("username",user.getUsername()));
             if(ObjectUtils.isEmpty(userRedis)){
                  return new Result<>(false,StatusCode.ACCESSERROR,"当前用户尚未注册！");
+            }
+            String s = "已申请";
+            if(userRedis.getStatus().equals(s)){
+                return new Result<>(false,StatusCode.USEREXIST,"当前用户尚未审核！");
             }
             String salt = userRedis.getSalt();
             String hashPassword = new Md5Hash(user.getPassword(), salt, 1024).toHex();
@@ -91,7 +97,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Page<User> userPage = new Page<>(userPageVo.getCurrent(),userPageVo.getSize());
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("status","已申请");
-        //List<User> users = userMapper.selectList(queryWrapper);
         Page<User> page = userMapper.selectPage(userPage, queryWrapper);
         return page;
     }
@@ -131,8 +136,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Page<User> userPage = userMapper.selectPage(page, queryWrapper);
         return userPage;
     }
-    /*
-    删除用户
+    /**
+     *删除用户
      */
     @Override
     public int deleteUserById(Integer id) {

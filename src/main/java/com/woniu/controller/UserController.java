@@ -4,6 +4,7 @@ package com.woniu.controller;
 import com.woniu.domin.User;
 import com.woniu.dto.Result;
 import com.woniu.service.UserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
