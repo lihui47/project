@@ -126,7 +126,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public Page findAllUser(UserPageVo userPageVo) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.ne("status","已申请");
+        queryWrapper.ne("name","admin");
         Page<User> page = new Page<>(userPageVo.getCurrent(), userPageVo.getSize());
         Page<User> userPage = userMapper.selectPage(page, queryWrapper);
         return userPage;
