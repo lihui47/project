@@ -46,8 +46,10 @@ public class User implements Serializable {
         @TableField(fill = FieldFill.INSERT_UPDATE)
       private Date gmtModifified;
 
+      @ApiModelProperty(value = "盐值")
       private String salt;
 
+      @ApiModelProperty(value = "用户状态")
       private String status;
 
 

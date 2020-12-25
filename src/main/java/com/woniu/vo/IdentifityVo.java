@@ -31,7 +31,7 @@ public class IdentifityVo  {
     //鉴定价格
     private BigDecimal identify_price;
     //新旧程度
-    private String newold;
+    private String oldnew;
     //鉴定结果
     private String indentifyresult;
 }
