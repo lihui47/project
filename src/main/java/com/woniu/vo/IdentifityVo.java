@@ -29,9 +29,9 @@ public class IdentifityVo  {
     //当前页码条数
     private Integer sizePage;
     //鉴定价格
-    private BigDecimal identify_price;
+    private Double iprice;
     //新旧程度
-    private String newold;
+    private String oldnew;
     //鉴定结果
     private String indentifyresult;
 }
