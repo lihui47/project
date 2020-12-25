@@ -9,6 +9,9 @@ import com.woniu.dto.StatusCode;
 import com.woniu.service.FirstService;
 import com.woniu.vo.CheckVO;
 import com.woniu.vo.PageVO;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -24,7 +27,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/first")
-//@CrossOrigin
 public class FirstController {
     @Resource
     private FirstService firstService;
@@ -38,24 +40,36 @@ public class FirstController {
     }
 
     @GetMapping("likeFirst")
+    @ApiOperation(value = "大类模糊查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "CheckVO", value = "封装的页面数据"),
+            @ApiImplicitParam(name = "current", value = "当前页码"),
+            @ApiImplicitParam(name = "id", value = "模糊查询数据的id"),
+            @ApiImplicitParam(name = "name", value = "模糊查询的名称"),
+            @ApiImplicitParam(name = "sizePage", value = "展示的条数")
+
+    })
     public Result queryFirstInfo(CheckVO checkVO)throws Exception {
         Page page = firstService.queryLikeInfo(checkVO);
         return new Result(true,StatusCode.OK,"模糊查询成功",page);
     }
 
     @PostMapping("insertFirst")
+    @ApiOperation(value = "新增大类")
     public Result insertFirstInfo(@RequestBody First first)throws Exception {
         Result result = firstService.insertFirstInfo(first);
         return result;
     }
 
     @PostMapping("updataFirst")
+    @ApiOperation(value = "修改大类")
     public Result updataFirstInfo(@RequestBody First first)throws Exception {
         Result result = firstService.updataFirstInfo(first);
         return result;
     }
 
     @PostMapping("deleteFirst")
+    @ApiOperation(value = "删除大类")
     public Result deleteFirst(@RequestBody First first)throws Exception {
         Result result = firstService.deleteFirstInfo(first);
         return result;
