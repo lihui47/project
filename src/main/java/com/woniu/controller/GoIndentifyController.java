@@ -31,7 +31,6 @@ public class GoIndentifyController {
             productAttribute.setId(ii.getPid());
             productAttribute.setStatus("已鉴定");
             //鉴定成功后，修改商品表里的状态
-            System.out.println("shhdjashdgasgsgh"+productAttribute);
             int result=productAttributeService.updateProductStatus(productAttribute);
             if(result<0){
                 return new Result(true, StatusCode.OK,"修改失败");

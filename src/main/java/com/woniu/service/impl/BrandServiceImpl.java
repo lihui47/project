@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2020-12-22
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = {Exception.class})
 public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements BrandService {
 
     @Resource
@@ -49,6 +49,12 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     public Page<Brand> queryBrandLikely(CheckVO checkVO) {
         QueryWrapper<Brand> wrapper = new QueryWrapper<>();
         wrapper.like("name",checkVO.getName());
-        return brandMapper.selectPage(new Page<Brand>(checkVO.getCurrent(), checkVO.getCurrent()), wrapper);
+        return brandMapper.selectPage(new Page<Brand>(checkVO.getCurrent(), checkVO.getSizePage()), wrapper);
+    }
+
+    @Override
+    public Page<Brand> queryBrands(CheckVO checkVO) {
+
+        return brandMapper.selectPage(new Page<Brand>(checkVO.getCurrent(), checkVO.getSizePage()), null);
     }
 }

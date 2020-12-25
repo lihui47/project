@@ -13,6 +13,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.experimental.PackagePrivate;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -49,22 +51,37 @@ public class BrandController {
         Page<Brand> page = brandService.queryBrandLikely(checkVO);
         return new Result<>(true, StatusCode.OK,"模糊查询成功",page);
     }
+    @GetMapping("/queryBrands")
+    public Result<Object> queryBrands(CheckVO checkVO){
+        Page<Brand> page = brandService.queryBrands(checkVO);
+        return new Result<>(true, StatusCode.OK,"分页查询成功",page);
+    }
+
 
     @PostMapping("/insert")
     @ApiOperation(value = "新增品牌")
     @ApiImplicitParam(name = "brand", value = "封装品牌信息数据")
     public Result<Object> addBrand(@RequestBody Brand brand){
-        brandService.addBrand(brand);
-        return new Result<>(true,StatusCode.OK,"新增成功");
+        if(StringUtils.isEmpty(brand.getName())&&StringUtils.isEmpty(brand.getAbbr())) {
+            return new Result<>(false, StatusCode.ERROR, "输入有误");
+        }
+        else{
+            brandService.addBrand(brand);
+            return new Result<>(true,StatusCode.OK,"新增成功");
+        }
     }
 
     @PostMapping("/update")
     @ApiOperation(value = "修改品牌")
     @ApiImplicitParam(name = "brand", value = "封装品牌信息数据")
     public Result<Object> update(@RequestBody Brand brand){
-        brandService.updateBrand(brand);
-        return new Result<>(true,StatusCode.OK,"修改成功");
-    }
+        if(StringUtils.isEmpty(brand.getName())&&StringUtils.isEmpty(brand.getAbbr())) {
+            return new Result<>(false, StatusCode.ERROR, "输入有误");
+        }
+        else{
+            brandService.updateBrand(brand);
+            return new Result<>(true,StatusCode.OK,"修改成功");
+    }}
 
     @GetMapping("/delete")
     @ApiOperation(value = "删除品牌")
@@ -73,5 +90,7 @@ public class BrandController {
         brandService.deleteBrandById(id);
         return new Result<>(true,StatusCode.OK,"删除成功");
     }
+
+
 }
 

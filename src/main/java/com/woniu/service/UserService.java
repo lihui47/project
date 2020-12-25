@@ -11,15 +11,15 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author team
- * @since 2020-12-21
+ * @since 2020 -12-21
  */
 public interface UserService extends IService<User> {
     /**
-     * Register result.
+     * Register .
      *
      * @param user the user
      * @return the result
@@ -27,27 +27,75 @@ public interface UserService extends IService<User> {
     Result<Object> register(User user);
 
     /**
-     * Login result.
+     * Login
      *
      * @param user the user
      * @return the result
      */
     Result<Object> login(User user);
-    //查询所以需要审核的用户
-   Page findAllCheckUser(UserPageVo userPageVo);
-    //审核通过用户
+
+
+    /**
+     * Find all check user page.
+     * 查询待审核的用户
+     * @param userPageVo the user page vo
+     * @return the page
+     */
+    Page<User> findAllCheckUser(UserPageVo userPageVo);
+
+    /**
+     * Update user by id int.
+     * 通过id修改用户
+     *
+     * @param user the user
+     * @return the int
+     */
     int updateUserById(User user);
-//    //审核通过之后，赋予用户角色
-//    int insertUserRole(User user);
-    //驳回用户
+
+    /**
+     * Update reject user by id int.
+     * 驳回
+     *
+     * @param user the user
+     * @return the int
+     */
     int updateRejectUserById(User user);
-    //分页查询所有用户
-    Page findAllUser(UserPageVo userPageVo);
-    //删除用户
+
+    /**
+     * Find all user page.
+     * 分页查询所以用户
+     *
+     * @param userPageVo the user page vo
+     * @return the page
+     */
+    Page<User> findAllUser(UserPageVo userPageVo);
+
+    /**
+     * Delete user by id int.
+     * 删除用户
+     *
+     * @param id the id
+     * @return the int
+     */
     int deleteUserById(Integer id);
-    //用户信息模糊插叙
+
+    /**
+     * Find user by blur list.
+     * 用户信息模糊插叙
+     *
+     * @param blur the blur
+     * @return the list
+     */
+
     List<User> findUserByBlur(UserBlurVo blur);
-    //禁用用户
+
+    /**
+     * Update prevent user by id int.
+     * 禁用用户
+     *
+     * @param user the user
+     * @return the int
+     */
     int updatePreventUserById(User user);
 
 }

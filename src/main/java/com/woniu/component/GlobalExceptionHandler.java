@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 /**
  * @author Alex
  */
-@RestControllerAdvice
+//@RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler({UnauthorizedException.class})
     public Result<Object> handlerUnauthorizedException(){ return new Result<>(false, StatusCode.ERROR,"权限不足"); }

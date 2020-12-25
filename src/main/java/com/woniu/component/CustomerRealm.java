@@ -1,10 +1,10 @@
 package com.woniu.component;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.woniu.domin.Permission;
 import com.woniu.domin.Role;
-import com.woniu.domin.User;
+import com.woniu.mapper.RoleMapper;
 import com.woniu.mapper.UserMapper;
-import com.woniu.service.UserService;
+import com.woniu.util.JwtUtil;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -13,45 +13,66 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
-import org.springframework.util.ObjectUtils;
+import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Alex
  */
+@Component
 public class CustomerRealm extends AuthorizingRealm {
     @Resource
-    private UserService userService;
+    private RoleMapper roleMapper;
     @Resource
     private UserMapper userMapper;
 
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        System.out.println("开始授权------------------------------------");
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof JwtToken;
+    }
+
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        System.out.println("————权限授予方法————");
+        //开始授权
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        User user = (User) principalCollection.getPrimaryPrincipal();
-        List<Role> roles = userMapper.findRolesById(user.getId());
-        roles.forEach(role -> simpleAuthorizationInfo.addRole(role.getName()));
+        String username = JwtUtil.getUsername(principals.toString());
+        //从令牌中获取用户名，查询该用户拥有的角色
+        List<Role> roles = userMapper.findRoles(username);
+        List<String> roleNames = new ArrayList<>();
+        List<String> permsNames = new ArrayList<>();
+
+        if (!CollectionUtils.isEmpty(roles)) {
+            for (Role role : roles) {
+                roleNames.add(role.getName());
+                //根据角色查询权限
+                List<Permission> permissions = roleMapper.getPermissions(role.getId());
+                if (!CollectionUtils.isEmpty(permissions)) {
+                    for (Permission permission : permissions) {
+                        permsNames.add(permission.getPermissionName());
+                    }
+                }
+            }
+            //为主体指定角色
+            simpleAuthorizationInfo.addRoles(roleNames);
+            //为主体指定可见资源
+            simpleAuthorizationInfo.addStringPermissions(permsNames);
+        }
         return simpleAuthorizationInfo;
     }
 
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        String principal = (String) token.getPrincipal();
-        //整合mybatis后再查询数据库获取
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username",principal);
-        User user = userService.getOne(queryWrapper);
-        //根据用户名查询得到的用户不为空
-        if (!ObjectUtils.isEmpty(user)) {
-            return new SimpleAuthenticationInfo(user,
-                    user.getPassword(),
-                    ByteSource.Util.bytes(user.getSalt()),
-                    this.getName());
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        String token = (String) authenticationToken.getCredentials();
+        // 解密获得username，用于和数据库进行对比
+        String username = JwtUtil.getUsername(token);
+        if (username == null || !JwtUtil.verify(token, username)) {
+            throw new AuthenticationException("token认证失败！");
         }
-        return null;
+        return new SimpleAuthenticationInfo(token, token, this.getName());
     }
 }
