@@ -43,6 +43,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         if (!ObjectUtils.isEmpty(roles)) {
             System.out.println(ObjectUtils.isEmpty(roles));
             for (Role role : roles) {
+                System.out.println(role.getName());
                 roleNames.add(role.getName());
                 //根据角色查询权限
                 List<Permission> permissions = roleMapper.getPermissions(role.getId());
