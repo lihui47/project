@@ -23,7 +23,7 @@ public interface UserMapper extends BaseMapper<User> {
      * @param username the u id
      * @return the list
      */
-    @Select("SELECT r.name\n" +
+    @Select("SELECT r.*\n" +
             "FROM t_user u\n" +
             "LEFT JOIN t_user_role ur\n" +
             "ON u.id = ur.id\n" +
@@ -31,5 +31,7 @@ public interface UserMapper extends BaseMapper<User> {
             "on ur.id = r.id\n" +
             "WHERE u.username =#{username};")
     List<Role> findRoles(String username);
+
+
 
 }

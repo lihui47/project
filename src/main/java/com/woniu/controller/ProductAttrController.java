@@ -64,6 +64,7 @@ public class ProductAttrController {
     @ApiOperation(value = "新增商品")
     @ApiImplicitParam(name = "ProductAttribute", value = "封装商品的数据")
     public Result insertProductAttr(@RequestBody ProductAttribute productAttribute) throws Exception {
+        System.out.println(productAttribute);
         Result result = productAttributeService.insertProductAttrInfo(productAttribute);
         return result;
     }

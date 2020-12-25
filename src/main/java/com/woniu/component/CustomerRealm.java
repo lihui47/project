@@ -37,7 +37,7 @@ public class CustomerRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        System.out.println("————权限授予方法————");
+        System.out.println("————权限授予方法————--------------------------------------------------");
         //开始授权
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         String username = JwtUtil.getUsername(principals.toString());

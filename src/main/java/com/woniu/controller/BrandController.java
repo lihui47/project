@@ -93,7 +93,7 @@ public class BrandController {
             return new Result<>(true,StatusCode.OK,"修改成功");
     }}
 
-    @GetMapping("/delete")
+    @PostMapping("/deleteBrand")
     @ApiOperation(value = "删除品牌")
     @ApiImplicitParam(name = "id", value = "删除数据的id")
     public Result<Object> delete(Integer id){

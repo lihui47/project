@@ -107,7 +107,7 @@ public class ProductAttrbuteImpl extends ServiceImpl<ProductAttributeMapper, Pro
                 productAttribute.setSid(second.getId());
                 productAttributeMapper.insert(productAttribute);
                 //设置商品列表的操作人
-                //identifity.setPid(productAttribute.getId()).setWriter(productAttribute.getUserName());
+                identifity.setPid(productAttribute.getId()).setWriter(productAttribute.getUserName()).setStatus(productAttribute.getStatus());
                 identifityInsertMapper.insert(identifity);
                 return new Result(true, StatusCode.OK,"新增成功");
             }
