@@ -132,6 +132,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Page findAllUser(UserPageVo userPageVo) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.ne("status","已申请");
+        queryWrapper.ne("username","admin");
         Page<User> page = new Page<>(userPageVo.getCurrent(), userPageVo.getSize());
         Page<User> userPage = userMapper.selectPage(page, queryWrapper);
         return userPage;
@@ -150,6 +151,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public List<User> findUserByBlur(UserBlurVo blur) {
+        System.out.println(blur.getSelect());
         List<User> users=null;
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         if(blur.getInput3()!=null){
