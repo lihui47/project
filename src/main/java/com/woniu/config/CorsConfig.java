@@ -16,7 +16,7 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
         //授权的源，冲突时使用该配置
         .allowedOrigins("*")
-       //.allowedOriginPatterns("*") //springboot 高版本使用 授权的源
+        //.allowedOriginPatterns("*") //springboot 高版本使用 授权的源
         //请求方式
         .allowedMethods("GET","POST","PUT","DELETE","HEAD","OPTIONS")
         //是否开启ajax相关的cookie提交

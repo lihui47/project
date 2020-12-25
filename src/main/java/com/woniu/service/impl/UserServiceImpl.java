@@ -8,19 +8,15 @@ import com.woniu.dto.StatusCode;
 import com.woniu.mapper.UserMapper;
 import com.woniu.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.woniu.util.JwtUtil;
+import com.woniu.util.RedisUtil;
 import com.woniu.util.SaltUtil;
 import com.woniu.vo.UserBlurVo;
 import com.woniu.vo.UserPageVo;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -33,7 +29,7 @@ import java.util.List;
  * @since 2020-12-21
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = {Exception.class})
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Resource
@@ -41,7 +37,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     /**
      * Register result.
-     *
+     * 员工注册
      * @param user the user
      * @return the result
      */
@@ -65,45 +61,40 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     /**
      * Login result.
-     *
+     * 员工登录
      * @param user the user
      * @return the result
      */
     @Override
     public Result<Object> login(User user) {
-        //在shiroFilter中配置了securityManager，会自动注入到securityUtils中
-        Subject subject = SecurityUtils.getSubject();
-        //创建令牌
-        UsernamePasswordToken authenticationToken = new UsernamePasswordToken(user.getUsername(), user.getPassword());
-        //进行认证
-        try {
-            if(!subject.isAuthenticated()&&!subject.isRemembered()){
-                subject.login(authenticationToken);
+        if(!ObjectUtils.isEmpty(user)){
+            User userRedis = userMapper.selectOne(new QueryWrapper<User>().eq("username",user.getUsername()));
+            if(ObjectUtils.isEmpty(userRedis)){
+                 return new Result<>(false,StatusCode.ACCESSERROR,"当前用户尚未注册！");
             }
-            //认证通过
-            return new Result<>(true,StatusCode.OK,"登录成功");
-        } catch (UnknownAccountException e) {
-            e.printStackTrace();
-            return new Result<>(false,StatusCode.USEREXIST,"用户名不存在");
-        } catch (IncorrectCredentialsException e) {
-            e.printStackTrace();
-            return new Result<>(false,StatusCode.LOGINERROR,"密码错误");
+            String salt = userRedis.getSalt();
+            String hashPassword = new Md5Hash(user.getPassword(), salt, 1024).toHex();
+            if (hashPassword.equals(userRedis.getPassword())) {
+                String token = JwtUtil.createToken(user.getUsername());
+                return new Result<>(true, StatusCode.OK, "登录成功！", token);
+            }
+            return new Result<>(false,StatusCode.LOGINERROR,"账号密码不匹配！");
+
         }
+        return new Result<>(false,StatusCode.ERROR,"输入有误");
     }
-    /*
-查询所以需要审核的员工
- */
+   /**
+    *查询所以需要审核的员工
+    */
     @Override
     public List<User> findAllCheckUser() {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("status","已申请");
-        List<User> users = userMapper.selectList(queryWrapper);
-        return users;
+        return userMapper.selectList(queryWrapper);
     }
-    /*
-    审核通过
-     */
-
+   /**
+    * 审核通过
+    */
     @Override
     public int updateUserById(User user) {
         user.setStatus("已通过");
@@ -113,8 +104,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         return 0;
     }
-    /*
-    驳回方法
+    /**
+     *驳回方法
      */
     @Override
     public int updateRejectUserById(User user) {
@@ -126,8 +117,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return 0;
 
     }
-    /*
-   查询所有用户，用于展示
+    /**
+     *查询所有用户，用于展示
      */
     @Override
     public Page findAllUser(UserPageVo userPageVo) {

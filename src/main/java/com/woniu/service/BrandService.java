@@ -47,4 +47,12 @@ public interface BrandService extends IService<Brand> {
      * @return the page
      */
     Page<Brand> queryBrandLikely(CheckVO checkVO);
+
+    /**
+     * Query brands page.
+     * 分页查询品牌
+     * @param checkVO the check vo
+     * @return the page
+     */
+    Page<Brand> queryBrands(CheckVO checkVO);
 }
