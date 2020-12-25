@@ -7,18 +7,23 @@ import com.woniu.dto.StatusCode;
 import com.woniu.service.GoIndentifyService;
 import com.woniu.service.IdentifityService;
 import com.woniu.service.ProductAttributeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/go")
+@Api(tags = {"商品鉴定的接口controller"})
 public class GoIndentifyController {
     @Resource
     private GoIndentifyService goIndentifyService;
     @Resource
     private ProductAttributeService productAttributeService;
+
     @GetMapping("addIndentify")
+    @ApiOperation(value = "鉴定商品功能")
     public Result addIndentify( Identifity identifity){
         System.out.println(identifity);
         int row=goIndentifyService.insertToUPdateIdentify(identifity);
