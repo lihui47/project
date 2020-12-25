@@ -34,13 +34,14 @@ public interface UserService extends IService<User> {
      */
     Result<Object> login(User user);
 
+
     /**
-     * Find all check user list.
-     * 查询所有用户
-     *
-     * @return the list
+     * Find all check user page.
+     * 查询待审核的用户
+     * @param userPageVo the user page vo
+     * @return the page
      */
-    List<User> findAllCheckUser();
+    Page<User> findAllCheckUser(UserPageVo userPageVo);
 
     /**
      * Update user by id int.
