@@ -51,6 +51,16 @@ public class BrandController {
         Page<Brand> page = brandService.queryBrandLikely(checkVO);
         return new Result<>(true, StatusCode.OK,"模糊查询成功",page);
     }
+
+    @ApiOperation(value = "品牌查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "CheckVO", value = "封装的页面数据"),
+            @ApiImplicitParam(name = "current", value = "当前页码"),
+            @ApiImplicitParam(name = "id", value = "模糊查询数据的id"),
+            @ApiImplicitParam(name = "name", value = "模糊查询的名称"),
+            @ApiImplicitParam(name = "sizePage", value = "展示的条数")
+
+    })
     @GetMapping("/queryBrands")
     public Result<Object> queryBrands(CheckVO checkVO){
         Page<Brand> page = brandService.queryBrands(checkVO);
